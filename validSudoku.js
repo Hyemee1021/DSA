@@ -1,107 +1,87 @@
-var isValidSoduku = function (board) {
-  //check if the board is valid
-  // rows have to have dictinct numbers
-  checkBoard(board);
-
-  //check column has distinct numbers
-  //also 3*3 box has to have distinct numbers
-  justColumn(board);
-  //1-9 distinct
-  //when number is not there store .
-
-  //check row, columns, cube- valid s
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
+var isValidSudoku = function (board) {
+  if (checkRow(board) && checkColumn(board) && checkSmallBox(board)) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
-// check if there are any duplicates and return true
-//[1,2,2,3 ]
+//checking duplicate-single array
 function checkDuplicate(arr) {
-  //store numbers in set
-  const newSet = new Set();
-  //if you keep value in another array, i have to loop through to find if ther is duplicate
+  let newMap = new Map();
+
+  //return true- id there is duplicate
   for (let num of arr) {
-    if (newSet.has(num)) {
-      return true;
-    } else {
-      newSet.add(num);
+    if (num === ".") {
+      continue;
     }
+    if (newMap.has(num)) {
+      return true;
+      //there is duplicate
+    }
+
+    newMap.set(num, true);
   }
-
   return false;
+  //there is no duplicate
 }
-
-// console.log(checkDuplicate([1,1]))
-
-function checkBoard(board) {
+//check 2dimention array-checking rows
+function checkRow(board) {
   for (let i = 0; i < board.length; i++) {
     if (checkDuplicate(board[i])) {
-      return true;
+      //checkDuplicate is true-> there is a duplicate
+      return false;
+      //so it is not vaild
     }
   }
-  return false;
+  return true;
+  //there is no duplicate
 }
-// console.log(checkBoard([[1,2], [1,1]]))
+// console.log(checkRow([[1, 2, 3, 4]]));
+//check column
+function checkColumn(board) {
+  let twoDArr = [];
+  for (let i = 0; i < board[0].length; i++) {
+    //loop through subArray first
+    let columnArr = [];
+    //reseting new columnArr
+    for (let j = 0; j < board.length; j++) {
+      columnArr.push(board[j][i]);
+    }
+    twoDArr.push(columnArr);
+  }
 
-function checkEntireBoard(board) {
-  //print all numbers
-  const newSet = new Set();
+  if (checkRow(twoDArr)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i].length; j++) {
-      // console.log(board[i][j])
+function checkSmallBox(board) {
+  let twoDArr = [];
 
-      if (newSet.has(board[i][j])) {
-        return true;
-      } else {
-        newSet.add(board[i][j]);
+  // There are 9 subgrids in a 9x9 Sudoku board
+  for (let startRow = 0; startRow < 9; startRow += 3) {
+    for (let startCol = 0; startCol < 9; startCol += 3) {
+      let threebythree = [];
+      for (let row = 0; row < 3; row++) {
+        for (let col = 0; col < 3; col++) {
+          threebythree.push(board[startRow + row][startCol + col]);
+        }
       }
+      twoDArr.push(threebythree);
     }
   }
-  return false;
-}
 
-//  console.log(checkEntireBoard([[1,2], [1,1], [1,1,1]]))
-
-function getThreePosition(board) {
-  let threeBythree = [];
-
-  for (let i = 0; i < board.length; i += 1) {
-    //thid one goes to 9 row
-
-    for (let j = 0; j < board[i].length; j += 3) {
-      threeBythree.push([board[i][j], board[i][j + 1], board[i][j + 2]]);
-      // console.log([board[i][j], board[i][j + 1], board[i][j + 2]]);
-      console.log(threeBythree);
-    }
+  if (checkRow(twoDArr)) {
+    return true;
+    //no duplicate
+  } else {
+    return false;
   }
 }
-
-//Goal!!
-//[5,3,.,6.,.,.,9,8]
-getThreePosition([
-  ["5", "3", ".", ".", "7", ".", ".", ".", "."],
-  ["6", ".", ".", "1", "9", "5", ".", ".", "."],
-  [".", "9", "8", ".", ".", ".", ".", "6", "."],
-]);
-//[[1,2,7,8], [1,1,2,3], [1,1,1,3]]
-function justColumn(board) {
-  for (let j = 0; j <= board[0].length; j++) {
-    const arr = [
-      board[0][j],
-      board[1][j],
-      board[2][j],
-      board[3][j],
-      board[4][j],
-      board[5][j],
-      board[6][j],
-      board[7][j],
-      board[8][j],
-    ];
-    // console.log(arr);
-    //I make an array then I can check it
-    checkDuplicate(arr);
-  }
-}
-
-// justColumn([[1,2,7,8], [1,1,2,3], [1,1,1,3]])
-
-// getThreePosition([[1,2, 4, 5], [1,1,2], [1,1,1]])

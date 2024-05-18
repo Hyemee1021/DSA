@@ -2,31 +2,42 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var threeSum = function(nums) {
+var threeSum = function (nums) {
+  // Sorting the array
+  nums.sort((a, b) => a - b);
 
-    //return three elements makes 0
-    //can return 2d array 
+  const result = [];
 
-    //lets track sum 
-    let sum =0
-    //[-1 0 1 2 -1 -4]
-    //[-1 -1 0 1 2 5]
-    let result =[]
-    //when sum + nums[i] === 0 
-    for(let i =0; i < nums.length; i++){
-      sum += nums[i]
-      //-1 + 0 + 1
+  for (let current = 0; current < nums.length - 2; current++) {
+    // Avoid duplicates for current value
+    if (current > 0 && nums[current] === nums[current - 1]) {
+      continue;
+    }
 
-      //make distinct array
-      
-      result.push(nums[i])
+    let left = current + 1;
+    let right = nums.length - 1;
 
-      if( sum += nums[i] === 0){
-   //sum becomes 0 again
-        sum =0
-        return result;
+    while (left < right) {
+      const sum = nums[current] + nums[left] + nums[right];
 
+      if (sum === 0) {
+        result.push([nums[current], nums[left], nums[right]]);
+        // Avoid duplicates for left and right pointers
+        while (left < right && nums[left] === nums[left + 1]) {
+          left++;
+        }
+        while (left < right && nums[right] === nums[right - 1]) {
+          right--;
+        }
+        left++;
+        right--;
+      } else if (sum < 0) {
+        left++;
+      } else {
+        right--;
       }
     }
- 
+  }
+
+  return result;
 };
