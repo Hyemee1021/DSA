@@ -6,70 +6,63 @@
  * @return {number[][]}
  */
 var floodFill = function (image, sr, sc, color) {
-  const startingP = image[sr][sc];
-
-  //avoiding visiting the same pixels I have already vitied
-  const visited = [];
-  //make an the same size array full of false
+  //image is 2d array
+  //start  floodfill from image[sr][sc]<-starting pixcel = color is 1
+  //4 directions connected
+  //among 4 directions with the same color-> change color given
+  //i need to return array
+  //what color do I have?? are the neighbors the same color?
+  let existingC = image[sr][sc];
+  //I dont have to visit the same picxel
+  let visited = [];
+  //I wiil make 2d array full with false
   for (let i = 0; i < image.length; i++) {
-    //this makes rows
-    //this makes columns
-    //there must be the first row-
-    visited[i] = Array(image[0].length).fill(false);
+    //make 2d array size as image[i].length and elements are false
+    visited = new Array(image[i].length).fill(false);
   }
-
-  fill(image, sr, sc, color, startingP, visited);
-
+  //i need to return changed 2 d array
+  //this helper function will change either change color of picxel or stay the same
+  helper(image, sr, sc + 1, existingC, color, visited);
+  helper(image, sr + 1, sc, existingC, color, visited);
+  helper(image, sr, sc - 1, existingC, color, visited);
+  helper(image, sr - 1, sc, existingC, color, visited);
   return image;
 };
 
-//this functuin will fill pixels
-function fill(image, curR, curC, color, startingP, visited) {
-  //base case1 - out of bounce
-  if (
-    curR < 0 ||
-    curR > image.length - 1 ||
-    curC < 0 ||
-    curC > image[0].length - 1
-  ) {
+//helper function will check 4 direction of one picxel
+function helper(image, cc, cr, existingC, color, visited) {
+  //check row is in bounce- image.length
+
+  //check column is in bounce- image[0].length
+  if (cr >= image.length || cc >= image[0].length || cc < 0 || cr < 0) {
     return;
   }
-  //base case 2-already visited
-  if (visited[curR][curC] === true) {
+  //check if image[][] is visited before
+  if (visited[cr][cc] || image[cr][cc] !== existingC) {
     return;
   }
 
-  //base case 3- the pixel is not same as starting pixel
+  image[cr][cc] = color;
+  visited[cr][cc] = true;
 
-  if (image[curR][curC] !== startingP) {
-    return;
-  }
-  image[curR][curC] = color;
-  visited[curR][curC] = true;
-
-  fill(image, curR + 1, curC, color, startingP, visited);
-  fill(image, curR - 1, curC, color, startingP, visited);
-  fill(image, curR, curC + 1, color, startingP, visited);
-  fill(image, curR, curC - 1, color, startingP, visited);
+  //lets check 4 direction of one picxel
+  helper(image, cc + 1, cr, existingC, color, visited);
+  helper(image, cc, cr + 1, existingC, color, visited);
+  helper(image, cc, cr - 1, existingC, color, visited);
+  helper(image, cc - 1, cr, existingC, color, visited);
 }
-
-// var floodFill = function(image, sr, sc, newColor) {
-//   const startingColor = image[sr][sc];
-//   const visited = new Array(image.length).fill().map(() => new Array(image[0].length).fill(false));
-//   fill(image, sr, sc, startingColor, newColor, visited);
-//   return image;
-// };
-
-// function fill(image, cr, cc, startingColor, newColor, visited) {
-//   if (cr < 0 || cr >= image.length || cc < 0 || cc >= image[0].length || visited[cr][cc] || image[cr][cc] !== startingColor) {
-//       return;
-//   }
-
-//   image[cr][cc] = newColor;
-//   visited[cr][cc] = true;
-
-//   fill(image, cr + 1, cc, startingColor, newColor, visited);
-//   fill(image, cr - 1, cc, startingColor, newColor, visited);
-//   fill(image, cr, cc + 1, startingColor, newColor, visited);
-//   fill(image, cr, cc - 1, startingColor, newColor, visited);
-// }
+//image.length = 3
+//image[0].length = 3
+//[[1 1 1 ], [1 1 1], [1 1 1 ]]
+console.log(
+  floodFill(
+    (image = [
+      [1, 1, 1],
+      [1, 1, 0],
+      [1, 0, 1],
+    ]),
+    (sr = 1),
+    (sc = 1),
+    (color = 2)
+  )
+);
