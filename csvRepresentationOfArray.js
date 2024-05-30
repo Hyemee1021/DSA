@@ -7,8 +7,9 @@ function toCsvText(array) {
     //enter subarray makes string
   }
 
-  newStr += newArray.join("");
+  newStr += newArray.join("\n");
   return newStr;
+  ;
   //return string
   //   "0,1,2,3,4\n" + "10,11,12,13,14\n" + "20,21,22,23,24\n" + "30,31,32,33,34";
 }

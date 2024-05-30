@@ -5,9 +5,11 @@ var countSheep = function (num) {
   //lets make a string
   let newStr = "";
   const length = num;
+
   for (let i = 1; i <= length; i++) {
     newStr += i + " sheep...";
   }
   return newStr;
+  
 };
 console.log(countSheep(3));
