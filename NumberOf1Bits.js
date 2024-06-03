@@ -20,14 +20,6 @@
 // };
 
 // console.log(hammingWeight(128));
-function hammingWeight(n) {
-  let res = 0;
-  while (n !== 0) {
-    res += n % 2;
-    n = n >> 1; // Right shift operator in JavaScript
-  }
-  return res;
-}
 
 // Test the function
 console.log(hammingWeight(11)); // Output: 3

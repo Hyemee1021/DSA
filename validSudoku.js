@@ -3,62 +3,85 @@
  * @return {boolean}
  */
 var isValidSudoku = function (board) {
-  //this function return this Sudoku is valid or not-true or false
-
-  //condition1- row-
+  //is row valid??
   for (let i = 0; i < board.length; i++) {
-    //even one row is false the whole Sudoku is false
-    if (!checkVaild(board[i])) {
+    if (!checkRepeat(board[i])) {
       return false;
+    } else {
+      return true;
     }
   }
 
-  //condition2 - col
-  for (let j = 0; j < 9; j++) {
-    //  iterate column first
-    const column = [];
-    for (let i = 0; i < 9; i++) {
-      //then row
-      column.push(board[i][j]);
-    }
-    //even one column is false the whole Sudoku is false
-    if (!checkVaild(column)) {
-      return false;
-    }
-  }
+  //is column valid??
+  checkColumn(board);
 
-  //3*3
+  //is 3*3 valid??
+  threeByThree(board);
 
-  for (let i = 0; i < 9; i += 3) {
-    for (let j = 0; j < 9; j += 3) {
-      const subgrid = [];
-      for (let x = 0; x < 3; x++) {
-        for (let y = 0; y < 3; y++) {
-          subgrid.push(board[i + x][j + y]);
-        }
-      }
-      if (!isValidSet(subgrid)) {
-        return false;
-      }
-    }
+  if (true && true && true) {
+    return true;
+  } else {
+    return false;
   }
 };
 
-//have a helper function to check if there is repeatation
-function checkVaild(arr) {
-  let numberSet = new Set();
+function checkRepeat(array) {
+  //i just need to check the number appears once
+  //map?? set???
+  let newSet = new Set();
 
-  for (let num of arr) {
-    if (numberSet.has(".")) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === ".") {
       continue;
+    } else if (newSet.has(array[i])) {
+      return false;
+    } else {
+      newSet.add(array[i]);
     }
-    if (numberSet.has(num)) {
-      //this means there is already number existed
+  }
+  console.log(newSet);
+  return true;
+}
+
+function checkColumn(board) {
+  //is column valid??
+  let column = [];
+  //lets make a column-
+  for (let i = 0; i < board[0].length; i++) {
+    //inner
+    for (let j = 0; j < board.length; j++) {
+      //outer
+      column.push(board[j][i]);
+      console.log(column);
+    }
+    if (!checkRepeat(column)) {
       return false;
     }
-    numberSet.add(num);
+    //clear the column
+    column = [];
   }
-  return true; //no repeation
+  return true;
+}
+
+function threeByThree(board) {
+  let newArray = [];
+  for (let i = 0; i < board.length; i += 3) {
+    for (let j = 0; j < board[0].length; j += 3) {
+      //outer
+
+      for (let m = i; m < i + 3; m++) {
+        for (let n = j; n < j + 3; n++) {
+          newArray.push(board[m][n]);
+          if (!checkRepeat(newArray)) {
+            return false;
+          }
+        }
+      }
+      //clear for eash array
+      newArray = [];
+    }
+  }
+  return true;
 }
 console.log(
   isValidSudoku([
