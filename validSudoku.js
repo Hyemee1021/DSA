@@ -7,8 +7,6 @@ var isValidSudoku = function (board) {
   for (let i = 0; i < board.length; i++) {
     if (!checkRepeat(board[i])) {
       return false;
-    } else {
-      return true;
     }
   }
 
@@ -56,9 +54,10 @@ function checkColumn(board) {
     }
     if (!checkRepeat(column)) {
       return false;
+    } else {
+      //clear the column
+      column = [];
     }
-    //clear the column
-    column = [];
   }
   return true;
 }
@@ -72,20 +71,21 @@ function threeByThree(board) {
       for (let m = i; m < i + 3; m++) {
         for (let n = j; n < j + 3; n++) {
           newArray.push(board[m][n]);
-          if (!checkRepeat(newArray)) {
-            return false;
-          }
         }
       }
-      //clear for eash array
-      newArray = [];
+      if (!checkRepeat(newArray)) {
+        return false;
+      } else {
+        //clear for eash array
+        newArray = [];
+      }
     }
   }
   return true;
 }
 console.log(
   isValidSudoku([
-    ["5", "3", ".", ".", "7", ".", ".", ".", "."],
+    ["8", "3", ".", ".", "7", ".", ".", ".", "."],
     ["6", ".", ".", "1", "9", "5", ".", ".", "."],
     [".", "9", "8", ".", ".", ".", ".", "6", "."],
     ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
