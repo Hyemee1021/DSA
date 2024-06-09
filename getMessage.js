@@ -11,7 +11,7 @@ function getMessageStatus(n, timestamps, messages, k) {
     if (newMap.has(messages[i])) {
       //yes? check the time stamps!
       //timestaps - old time is it too soon?? early than the k time??
-      if (timestamps[i] - newMap.get(messages[i]) > k) {
+      if (timestamps[i] - newMap.get(messages[i]) >= k) {
         result.push(true);
       } else {
         result.push(false);
