@@ -11,10 +11,10 @@ function getMinTime(task_memory, task_type, max_memory) {
     const type = task_type[i]; //integer
     const memory = task_memory[i]; //integer
     if (container.hasOwnProperty(type)) {
-      //yes? check max_memory
+      //yes? same type
       container[type] += memory;
-      //if they are within amx_memory do  nothing
     } else {
+      //no-assign to container obj
       container[type] = memory;
     }
   }
@@ -22,7 +22,7 @@ function getMinTime(task_memory, task_type, max_memory) {
   //return minimum time required to process all task-how many unit
 }
 
-console.log(getMinTime([7, 2, 3, 9], [1, 2, 1, 3], 10));
+console.log(getMinTime([7, 2, 4, 9], [1, 2, 1, 3], 10));
 
 function countUnit(obj, max_memory) {
   //loop obj>
