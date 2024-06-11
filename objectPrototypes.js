@@ -1,1 +1,13 @@
-// https://www.codewars.com/kata/557e508a47c7e9adf9000062/train/javascript
+var widget = {
+  foo: "bar",
+};
+
+var gadget = {
+  bar: "foo",
+};
+
+var thingamabob = {
+  bar: "food",
+};
+Object.prototype.description = "TODO: GIVE ME A DESCRIPTION";
+console.log(widget.description);
