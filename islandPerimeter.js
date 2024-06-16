@@ -16,7 +16,7 @@ var islandPerimeter = function (grid) {
   return perimeterCount;
 };
 
-//this count perimeter of one block
+//this count perimeter of one block-grid[i][j]
 function countPerimeter(grid, i, j) {
   let count = 0;
   //lets check I do go out of bounce
@@ -29,7 +29,7 @@ function countPerimeter(grid, i, j) {
     return 0;
   } else {
     //its land here
-    //check if there is a land upside
+    //check if there is a land downside
 
     if (j - 1 > 0 && grid[i][j - 1] === 1) {
       count -= 1;
