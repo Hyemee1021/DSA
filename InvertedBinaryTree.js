@@ -1,4 +1,6 @@
 /**
+ *
+ * /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
  *     this.val = (val===undefined ? 0 : val)
@@ -11,6 +13,19 @@
  * @return {TreeNode}
  */
 
-function solution(root) {}
+function solution(root) {
+  if (!root) {
+    return null;
+  }
+
+  let temp = root.left;
+  root.left = root.right;
+  root.right = temp;
+
+  solution(root.left);
+  solution(root.right);
+
+  return root;
+}
 //tho function just swtich va
 console.log(solution([2, 1, 3]));
