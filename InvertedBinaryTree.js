@@ -28,4 +28,4 @@ function solution(root) {
   return root;
 }
 //tho function just swtich va
-console.log(solution([2, 1, 3]));
+console.log(solution(TreeNode(2, 1, 3)));
