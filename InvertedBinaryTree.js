@@ -11,23 +11,6 @@
  * @return {TreeNode}
  */
 
-function solution(root) {
-  //edge case
-  if (root === null) {
-    return [];
-  }
-  //edge case
-  if (root.left === null || root.left === null) {
-    //dont swtich
-  }
-  //root.left <-> root.right
-  swtich(root);
-  //return root
-  return root;
-}
-//tho function just swtich val
-function swtich(root) {
-  root.left = root.right;
-}
-
+function solution(root) {}
+//tho function just swtich va
 console.log(solution([2, 1, 3]));
