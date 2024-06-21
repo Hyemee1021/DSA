@@ -1,18 +1,16 @@
 /**
- *
- * /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
+ *     this.val = (val === undefined ? 0 : val);
+ *     this.left = (left === undefined ? null : left);
+ *     this.right = (right === undefined ? null : right);
  * }
  */
+
 /**
  * @param {TreeNode} root
  * @return {TreeNode}
  */
-
 function solution(root) {
   if (!root) {
     return null;
@@ -27,5 +25,18 @@ function solution(root) {
 
   return root;
 }
-//tho function just swtich va
-console.log(solution(TreeNode(2, 1, 3)));
+
+// Example usage:
+// Create the binary tree
+let root = new TreeNode(2);
+root.left = new TreeNode(1);
+root.right = new TreeNode(3);
+
+console.log("Original tree:");
+console.log(root);
+
+// Invert the binary tree
+let invertedTree = solution(root);
+
+console.log("Inverted tree:");
+console.log(invertedTree);
