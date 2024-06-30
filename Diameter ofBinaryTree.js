@@ -10,13 +10,21 @@
  * @param {TreeNode} root
  * @return {number}
  */
-var diameterOfBinaryTree = function(root) {
-    
-  //getting the height of the tree
+var diameterOfBinaryTree = function (root) {
+  //recursion to count diameter-function
 
-  //basecase 
-  if( root === null){
-    return 0
+  function countDiameter(node) {
+    let diameter = 0;
+    if (node === null) {
+      return 0;
+    }
+    let leftDiameter = countDiameter(node.left);
+    let rightDiameter = countDiameter(node.right);
+
+    diameter = 1 + Math.max(diameter, leftDiameter, rightDiameter);
   }
-  
+
+  //call the helper function here
+  countDiameter(root);
+  return diameter;
 };
