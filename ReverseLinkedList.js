@@ -10,26 +10,24 @@
  * @return {ListNode}
  */
 var reverseList = function (head) {
-  if (!head || !head.next) {
+  //edge case handling
+  if (head === null || head.next === null) {
     return head;
   }
 
-  //current
+  //I need three pointers
+  let prev = null;
   let current = head;
-  //head.previous
-  let previous = null;
-  let next = null;
-  //head.next
-  //loop unitl current === null
+  let nextNode;
+
   while (current !== null) {
-    next = current.next;
-    current.next = previous;
-    previous = current;
-
-    current = next;
+    nextNode = current.next; //save next value
+    current.next = prev; //point baack
+    prev = current;
+    current = nextNode; //passing next value move forward
   }
-
-  return previous;
+  return prev;
 };
+
 //pre   currnet  next
 //       1->2
