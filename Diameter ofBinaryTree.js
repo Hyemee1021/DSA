@@ -1,30 +1,26 @@
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {TreeNode} root
- * @return {number}
- */
 var diameterOfBinaryTree = function (root) {
-  //recursion to count diameter-function
+  let diameter = 0;
 
+  // Helper function to calculate depth and update diameter
   function countDiameter(node) {
-    let diameter = 0;
     if (node === null) {
-      return 0;
+      return 0; // If node is null, depth is 0
     }
-    let leftDiameter = countDiameter(node.left);
-    let rightDiameter = countDiameter(node.right);
 
-    diameter = 1 + Math.max(diameter, leftDiameter, rightDiameter);
+    // Recursively calculate depth of left and right subtrees
+    let leftDepth = countDiameter(node.left);
+    let rightDepth = countDiameter(node.right);
+
+    // Update diameter to be the maximum of current diameter or leftDepth + rightDepth
+    diameter = Math.max(diameter, leftDepth + rightDepth);
+
+    // Return the depth of the current node's subtree
+    return Math.max(leftDepth, rightDepth) + 1;
   }
 
-  //call the helper function here
+  // Start the recursive calculation from the root of the tree
   countDiameter(root);
+
+  // Return the calculated diameter
   return diameter;
 };
