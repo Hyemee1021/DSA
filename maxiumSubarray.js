@@ -2,15 +2,18 @@
  * @param {number[]} nums
  * @return {number}
  */
-var maxSubArray = function (nums) {
-  let cur_sum = 0;
-  let max_sum = -Infinity;
+function maxSubArray(nums) {
+  let maxSum = nums[0]; // Initialize maxSum with the first element
+  let currentSum = nums[0]; // Initialize currentSum with the first element
 
-  for (let num of nums) {
-    cur_sum = Math.max(num, cur_sum + num);
-
-    max_sum = Math.max(cur_sum, max_sum);
+  for (let i = 1; i < nums.length; i++) {
+    currentSum = Math.max(nums[i], currentSum + nums[i]); // Decide whether to start a new subarray or continue the existing one
+    maxSum = Math.max(maxSum, currentSum); // Update the maximum sum found so far
   }
-  return max_sum;
-};
-console.log(maxSubArray([2, -3, 5, -1, 8, -7]));
+
+  return maxSum;
+}
+
+// Example usage:
+let nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
+console.log(maxSubArray(nums)); // Output: 6
