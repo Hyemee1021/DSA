@@ -13,14 +13,20 @@ var maxArea = function (height) {
 
   let left = 0;
   let right = height.length - 1;
-  let maxWater = -Infinity;
-  let curentWater = 0;
+  let maxWater = 0;
+
   while (left <= right) {
     let index = Math.abs(left - right);
-    curentWater = index * Math.min(height[left], height[right]);
+    console.log("index" + index);
+
+    let curentWater = index * Math.min(height[left], height[right]);
     maxWater = Math.max(maxWater, curentWater);
-    left++;
-    right--;
+    console.log("maxWater" + maxWater);
+    if (height[left] < height[right]) {
+      left++;
+    } else {
+      right--;
+    }
   }
 
   return maxWater;
