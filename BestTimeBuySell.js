@@ -2,18 +2,34 @@
  * @param {number[]} prices
  * @return {number}
  */
-var maxProfit = function(prices) {
+var maxProfit = function (prices) {
+  //prices-array
+  //prices[i] stock 0f ith day
 
-  let profit=0
-  let buy= prices[0]
+  //lowest stock to buy -before day
+  //higest stock to sell - later day
 
-  for(let i=1; i< prices.length-1; i++){
-    if( buy > prices[i]){
-      buy= prices[i];
+  let minimum = prices[0];
+  let maximum = 0;
+
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] < minimum) {
+      minimum = prices[i];
+    } else {
+      //prices[i] is bigger
+      let current = prices[i] - minimum;
+      maximum = Math.max(current, maximum);
     }
-
-    profit = prices[i] - buy;
-
   }
-    return profit;
+
+  //return maximum profit
+  return maximum;
 };
+
+//                    b, s
+//                       b, s
+//                       b     ,s
+//                       b         s
+//
+//                           b
+console.log(maxProfit([7, 1, 5, 3, 6, 4]));
