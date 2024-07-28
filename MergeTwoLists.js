@@ -3,32 +3,32 @@
  * @return {number[][]}
  */
 var merge = function (intervals) {
-  //lets sort
-  intervals.sort((a, b) => a[0] - b[0]);
-  //merge array
-  const merge = [];
+  if (intervals.length === 0) return [];
 
-  //let loop the intervals
-  for (let interval of intervals) {
-    if (merge.length === 0 || merge[merge.length - 1][1] < interval[0]) {
-      merge.push(interval);
+  intervals.sort((a, b) => a[0] - b[0]);
+
+  let prev = intervals[0];
+  let merge = [];
+
+  for (let i = 1; i < intervals.length; i++) {
+    if (intervals[i][0] <= prev[1]) {
+      prev[1] = Math.max(intervals[i][1], prev[1]);
     } else {
-      //they ae overlapped
-      //     [1,4]  [2,6]-  [1, 6]
-      merge[merge.length - 1][1] = Math.max(
-        merge[merge.length - 1][1],
-        interval[1]
-      );
+      merge.push(prev);
+      prev = intervals[i];
     }
   }
 
+  // Don't forget to add the last interval
+  merge.push(prev);
   return merge;
 };
 
 console.log(
   merge([
-    [1, 4],
+    [1, 3],
     [2, 6],
     [8, 10],
+    [15, 18],
   ])
 );
