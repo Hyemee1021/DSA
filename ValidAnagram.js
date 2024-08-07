@@ -3,31 +3,43 @@
  * @param {string} t
  * @return {boolean}
  */
-var isAnagram = function(s, t) {
-    //if there is anagram- return true
-
-    if(s.length !== t.length){
-      return false
+var isAnagram = function (s, t) {
+  //s, t - string
+  if (s.length !== t.length) {
+    return false;
+  }
+  const newMap = new Map();
+  for (let char of s) {
+    //set? or map?
+    //a :2,<- i would like to store
+    if (newMap.has(char)) {
+      newMap.set(char, newMap(char) + 1);
+    } else {
+      newMap.set(char, 1);
     }
-    //hash map
-    const sCount={}
-    const tCount={}
-    const L = s.length;//there is a number
+  }
 
-    for (let i =0; i<L; i++){
-//there is no need to say L.length
-      if(!sCount[s[i]]) sCount[s[i]]=0
-      if(!tCount[t[i]]) tCount[t[i]]=0
-
-      sCount[s[i]]++
-      tCount[t[i]]++
-    }
-
-    for (  let char in sCount){
-      if(sCount[char] !== tCount[char]){
-        return false
-      }
+  for (let char of t) {
+    //a :2,<- i would like to store
+    if (newMap.has(char)) {
+      newMap.set(char, newMap(char) - 1);
+    } else {
+      return false;
     }
 
-    return true
+    if (newMap.get(char) < 0) {
+      return false;
+    }
+  }
+
+  // Check that all values in the map are zero
+  for (let value of newMap.values()) {
+    if (value !== 0) {
+      return false;
+    }
+  }
+  //return boolean
+  return true;
 };
+
+console.log(isAnagram("ab", "a"));
