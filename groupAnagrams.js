@@ -1,31 +1,39 @@
 // Example map
-const map = new Map();
-map.set("aet", ["eat", "tea", "ate"]);
-map.set("ant", ["tan", "nat"]);
-map.set("abt", ["bat"]);
+// const map = new Map();
+// map.set("aet", ["eat", "tea", "ate"]);
+// map.set("ant", ["tan", "nat"]);
+// map.set("abt", ["bat"]);
 
-// Convert map values to an array of arrays
-const result = Array.from(map.values());
-console.log(result); // Output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
+// // Convert map values to an array of arrays
+// const result = Array.from(map.values());
+// console.log(result);
+// Output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
 
 var groupAnagrams = function (strs) {
-  const map = new Map();
-
-  // Helper function to sort characters in a string
-  function sortString(str) {
-    return str.split("").sort().join("");
+  //edge case
+  if (strs.length <= 1) {
+    return [strs];
   }
+
+  const newMap = new Map();
+
+  //methods- has(), set(), get()
 
   for (let str of strs) {
-    const key = sortString(str);
-    if (!map.has(key)) {
-      map.set(key, []);
+    //"eat"=> "e","a","t"=> sort =>"a", "e","t"=> "aet"
+    const sorted = str.split("").sort().join();
+
+    if (!newMap.has(sorted)) {
+      //set the sorted as key and value type as empty array
+      newMap.set(sorted, []);
     }
-    map.get(key).push(str);
+    //push to value- push original word(str)
+    //like this I can put first value- i set the key and put the value as well
+    newMap.get(sorted).push(str);
   }
 
-  // Convert map values to an array of arrays
-  return Array.from(map.values());
+  //return 2-d array - only [[values], []]
+  return Array.from(newMap.values());
 };
 
 // Example usage
