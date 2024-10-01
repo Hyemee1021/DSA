@@ -1,5 +1,12 @@
-function myFunction(a) {
-  return a.slice(0, 3);
+function myFunction(a, b) {
+  if (a.includes(b)) {
+    return b + a;
+  } else {
+    return a + b;
+  }
 }
-// remove the first 3 chractor
-console.log(myFunction("abcdefg"));
+// check a contains b
+//yes - b comes front a
+//no-a+b
+
+console.log(myFunction("cheese", "cake"));
