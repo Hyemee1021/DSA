@@ -1,12 +1,9 @@
 function myFunction(a, b) {
-  if (a.includes(b)) {
-    return b + a;
-  } else {
-    return a + b;
-  }
+  // a, b  - string
+  //in b how manyh times a occures
+  return b.split(a).length - 1;
 }
-// check a contains b
-//yes - b comes front a
-//no-a+b
 
-console.log(myFunction("cheese", "cake"));
+console.log(
+  myFunction("m", "how many times does the character occur in this sentence?")
+);
