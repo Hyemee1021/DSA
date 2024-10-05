@@ -1,9 +1,11 @@
-function myFunction(a, b) {
-  // a, b  - string
-  //in b how manyh times a occures
-  return b.split(a).length - 1;
+function myFunction(a) {
+  // a-number
+  // true- no deciaml
+
+  if (a === Math.floor(a)) {
+    return true;
+  }
+  return false;
 }
 
-console.log(
-  myFunction("m", "how many times does the character occur in this sentence?")
-);
+console.log(myFunction(4.4));
