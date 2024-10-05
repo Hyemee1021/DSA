@@ -1,11 +1,10 @@
 function myFunction(a) {
-  // a-number
-  // true- no deciaml
-
-  if (a === Math.floor(a)) {
-    return true;
-  }
-  return false;
+  //  a-  number-
+  // to split shoudk I make number to String?
+  const newStr = a.toString();
+  console.log(newStr);
+  const newArr = newStr.split("");
+  return newArr.map((char) => Number(char));
 }
 
-console.log(myFunction(4.4));
+console.log(myFunction(10));
