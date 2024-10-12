@@ -1,10 +1,5 @@
 function myFunction(a) {
-  //  a-  number-
-  // to split shoudk I make number to String?
-  const newStr = a.toString();
-  console.log(newStr);
-  const newArr = newStr.split("");
-  return newArr.map((char) => Number(char));
+  return a.sort((a, b) => b - a);
 }
 
-console.log(myFunction(10));
+console.log(myFunction([1, 3, 2]));
