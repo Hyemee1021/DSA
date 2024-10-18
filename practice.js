@@ -1,13 +1,8 @@
-function myFunction(a) {
-  let max = 0;
-  let longest = "";
-  for (let i = 0; i < a.length; i++) {
-    if (a[i].length > max) {
-      max = a[i].length;
-      longest = a[i];
-    }
-  }
-  return longest;
+function myFunction(a, b) {
+  // merge two arrays however, no duplicates
+  const newSet = new Set([...a, ...b]);
+  const newArr = [...newSet];
+  return newArr.sort((a, b) => a - b);
 }
 
-console.log(myFunction(["help", "me"]));
+console.log(myFunction([3, 4, 6], [3, 4, 5]));
